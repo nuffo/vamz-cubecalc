@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CubeCalc</string>
+    <string name="harvest1">I am strong.</string>
+    <string name="harvest2">I believe in myself.</string>
+    <string name="harvest3">Each day is</string>
+    <string name="harvest4">Every challenge.</string>
+    <string name="harvest5">I have so much.</string>
+    <string name="harvest6">Good things.</string>
+    <string name="harvest7">New opportunities.</string>
+    <string name="harvest8">I have the courage.</string>
+    <string name="harvest9">Things will unfold.</string>
+    <string name="harvest10">I will be present.</string>
+    <string name="title_all_harvests">Harvests</string>
+    <string name="harvest_item_edit_button">Edit harvest</string>
+    <string name="harvest_item_delete_button">Delete harvest</string>
+    <string name="add_new_harvest">Add new harvest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="spruce">SPRUCE:</string>
+    <string name="beech">BEECH:</string>
+    <string name="fir">FIR:</string>
+    <string name="logs">logs</string>
+    <string name="m3">m3</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="no_harvest_yet">No harvest yet!</string>
+    <string name="add_log">ADD LOG</string>
+    <string name="enter_length_in_metres">Enter length in metres</string>
+    <string name="enter_diameter_in_centimetres">Enter diameter in centimetres</string>
+    <string name="length">Length</string>
+    <string name="diameter">Diameter</string>
+    <string name="spruce_radio">spruce</string>
+    <string name="beech_radio">beech</string>
+    <string name="fir_radio">fir</string>
+</resources>
