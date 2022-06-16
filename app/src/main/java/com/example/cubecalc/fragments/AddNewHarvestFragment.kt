@@ -9,9 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.cubecalc.R
@@ -19,6 +16,10 @@ import com.example.cubecalc.model.Harvest
 import com.example.cubecalc.viewmodel.HarvestViewModel
 import com.example.cubecalc.databinding.FragmentAddNewHarvestBinding
 import java.util.*
+
+const val KEY_YEAR_ADD = "year_key"
+const val KEY_MONTH_ADD = "month_key"
+const val KEY_DAY_ADD = "day_key"
 
 /**
  * A simple [Fragment] subclass.
@@ -36,9 +37,7 @@ class AddNewHarvestFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_add_new_harvest, container, false)
-        Log.i("AddNewHarvestFragment", "onCreateView Called")
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_new_harvest, container, false)
         binding.addNewHarvestButton.setOnClickListener { onAddHarvest() }
         binding.backButton.setOnClickListener { view : View -> view.findNavController().navigate(AddNewHarvestFragmentDirections.actionAddNewHarvestFragmentToAllHarvestsFragment()) }
 
@@ -49,7 +48,22 @@ class AddNewHarvestFragment : Fragment() {
         selectedMonth = currentDate.get(Calendar.MONTH)
         selectedDay = currentDate.get(Calendar.DAY_OF_MONTH)
 
+        if (savedInstanceState != null) {
+            selectedYear = savedInstanceState.getInt(KEY_YEAR_ADD, 0)
+            selectedMonth = savedInstanceState.getInt(KEY_MONTH_ADD, 0)
+            selectedDay = savedInstanceState.getInt(KEY_DAY_ADD, 0)
+
+            binding.harvestDate.text = "$selectedDay.${selectedMonth + 1}.$selectedYear"
+        }
+
         return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_YEAR_ADD, selectedYear)
+        outState.putInt(KEY_MONTH_ADD, selectedMonth)
+        outState.putInt(KEY_DAY_ADD, selectedDay)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,72 +88,26 @@ class AddNewHarvestFragment : Fragment() {
         val title = binding.harvestTitle.text.toString()
         val date = binding.harvestDate.text.toString()
 
-        if (title.isEmpty()) {
-            Toast.makeText(requireContext(), "Please enter title of harvest!", Toast.LENGTH_SHORT).show()
-
-        } else if (date.isEmpty()){
-            Toast.makeText(requireContext(), "Please select date of harvest!", Toast.LENGTH_SHORT).show()
-        } else {
-            //insertDataToDatabase()
-            val title = binding.harvestTitle.text.toString()
-            val dateText = "${selectedMonth + 1}/$selectedDay/$selectedYear"
-            val date = Date(dateText)
-            val harvest = Harvest(0, title, date, 0,0,0,0.0,0.0,0.0, System.currentTimeMillis())
-            //mHarvestViewModel.addHarvest(harvest)
-            Toast.makeText(requireContext(), "Harvest succesfully added!", Toast.LENGTH_SHORT).show()
-
-            mHarvestViewModel.getLastAdded().observe(viewLifecycleOwner, Observer<Harvest> { h ->
-                requireView().findNavController().navigate(AddNewHarvestFragmentDirections.actionAddNewHarvestFragmentToEditHarvestFragment(h.id))
-            })
+        when {
+            title.isEmpty() -> {
+                Toast.makeText(requireContext(), "Please enter title of harvest!", Toast.LENGTH_SHORT).show()
+            }
+            date.isEmpty() -> {
+                Toast.makeText(requireContext(), "Please select date of harvest!", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                insertHarvestToDatabase()
+                requireView().findNavController().navigate(AddNewHarvestFragmentDirections.actionAddNewHarvestFragmentToAllHarvestsFragment())
+            }
         }
     }
 
-//    private fun insertDataToDatabase() {
-//        val title = binding.harvestTitle.text.toString()
-//        val dateText = "${selectedMonth + 1}/$selectedDay/$selectedYear"
-//        val date = Date(dateText)
-//        val harvest = Harvest(0, title, date, 0,0,0,0.0,0.0,0.0)
-//        mHarvestViewModel.addHarvest(harvest)
-//        Toast.makeText(requireContext(), "Succesfully added!", Toast.LENGTH_SHORT).show()
-//        requireView().findNavController().navigate(AddNewHarvestFragmentDirections.actionAddNewHarvestFragmentToEditHarvestFragment(harvest))
-//    }
-
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        Log.i("AddNewHarvestFragment", "onAttach called")
-//    }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        Log.i("AddNewHarvestFragment", "onCreate called")
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        Log.i("AddNewHarvestFragment", "onViewCreated called")
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        Log.i("AddNewHarvestFragment", "onStart called")
-//    }
-//    override fun onResume() {
-//        super.onResume()
-//        Log.i("AddNewHarvestFragment", "onResume called")
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        Log.i("AddNewHarvestFragment", "onPause called")
-//    }
-//    override fun onStop() {
-//        super.onStop()
-//        Log.i("AddNewHarvestFragment", "onStop called")
-//    }
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        Log.i("AddNewHarvestFragment", "onDestroyView called")
-//    }
-//    override fun onDetach() {
-//        super.onDetach()
-//        Log.i("AddNewHarvestFragment", "onDetach called")
-//    }
+    private fun insertHarvestToDatabase() {
+        val title = binding.harvestTitle.text.toString()
+        val dateText = "${selectedMonth + 1}/$selectedDay/$selectedYear"
+        val date = Date(dateText)
+        val harvest = Harvest(0, title, date, 0,0,0,0.0,0.0,0.0, System.currentTimeMillis())
+        mHarvestViewModel.addHarvest(harvest)
+        Toast.makeText(requireContext(), "Harvest succesfully added!", Toast.LENGTH_SHORT).show()
+    }
 }

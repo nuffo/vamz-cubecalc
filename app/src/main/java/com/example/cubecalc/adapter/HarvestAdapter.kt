@@ -57,15 +57,13 @@ class HarvestAdapter(private val harvestRecyclerViewInterface: HarvestRecyclerVi
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = harvestList[position]
-//        holder.itemView.harvest_title.text = item.title.toString()
-//        holder.itemView.harvest_date.text = item.date.toString()
         holder.title.text = item.title.toString()
         holder.date.text = item.dateToString("dd.MM.yyyy")
         holder.logsCount.text = (item.spruceLogsCount + item.beechLogsCount + item.firLogsCount).toString()
         holder.cubicMetreCount.text = String.format("%.2f", item.spruceCubeMetres + item.beechCubeMetres + item.firCubeMetres)
 
         holder.editButton.setOnClickListener {
-            val action = AllHarvestsFragmentDirections.actionAllHarvestsFragmentToEditHarvestFragment(item.id)
+            val action = AllHarvestsFragmentDirections.actionAllHarvestsFragmentToEditHarvestFragment(item)
             holder.itemView.findNavController().navigate(action)
         }
 

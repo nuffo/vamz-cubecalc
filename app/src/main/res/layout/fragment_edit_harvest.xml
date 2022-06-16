@@ -5,6 +5,7 @@
 
     <data>
         <variable name="harvest" type="com.example.cubecalc.model.Harvest" />
+        <variable name="viewModel" type="com.example.cubecalc.viewmodel.EditHarvestViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -114,7 +115,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
-                                android:text="@{Integer.toString(harvest.spruceLogsCount)}"/>
+                                android:text="@{String.format(&quot;%d&quot;, viewModel.spruceLogsCount)}"/>
 
                             <TextView
                                 android:id="@+id/spruce_logs_title"
@@ -147,7 +148,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
                                 android:textAlignment="viewEnd"
-                                android:text="@{String.format(&quot;%.2f&quot;, harvest.spruceCubeMetres)}"/>
+                                android:text="@{String.format(&quot;%.2f&quot;, viewModel.spruceCubicMetres)}"/>
 
                             <TextView
                                 android:id="@+id/spruce_metres_title"
@@ -204,7 +205,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
-                                android:text="@{Integer.toString(harvest.beechLogsCount)}"/>
+                                android:text="@{Integer.toString(viewModel.beechLogsCount)}"/>
 
                             <TextView
                                 android:id="@+id/beech_logs_title"
@@ -237,7 +238,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
                                 android:textAlignment="viewEnd"
-                                android:text="@{String.format(&quot;%.2f&quot;, harvest.beechCubeMetres)}"/>
+                                android:text="@{String.format(&quot;%.2f&quot;, viewModel.beechCubicMetres)}"/>
 
                             <TextView
                                 android:id="@+id/beech_metres_title"
@@ -294,7 +295,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
-                                android:text="@{Integer.toString(harvest.firLogsCount)}"/>
+                                android:text="@{Integer.toString(viewModel.firLogsCount)}"/>
 
                             <TextView
                                 android:id="@+id/fir_logs_title"
@@ -327,7 +328,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="0"
                                 android:textAlignment="viewEnd"
-                                android:text="@{String.format(&quot;%.2f&quot;, harvest.firCubeMetres)}"/>
+                                android:text="@{String.format(&quot;%.2f&quot;, viewModel.firCubicMetres)}"/>
 
                             <TextView
                                 android:id="@+id/fir_metres_title"

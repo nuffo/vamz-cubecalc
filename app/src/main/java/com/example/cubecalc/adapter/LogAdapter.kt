@@ -16,7 +16,7 @@ import org.w3c.dom.Text
 
 class LogAdapter(private val logRecyclerViewInterface: LogRecyclerViewInterface) : RecyclerView.Adapter<LogAdapter.ItemViewHolder>() {
 
-    private var logList = emptyList<Log>()
+    private var logList = mutableListOf<Log>()
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val type: TextView
@@ -54,7 +54,7 @@ class LogAdapter(private val logRecyclerViewInterface: LogRecyclerViewInterface)
 
     override fun getItemCount() = logList.size
 
-    fun setData(log: List<Log>) {
+    fun setData(log: MutableList<Log>) {
         this.logList = log
         notifyDataSetChanged()
     }
@@ -69,5 +69,10 @@ class LogAdapter(private val logRecyclerViewInterface: LogRecyclerViewInterface)
         builder.setTitle("Delete log")
         builder.setMessage("Are you sure to delete log?")
         builder.show()
+    }
+
+    fun removeLog(log: Log) {
+        this.logList.remove(log)
+        notifyDataSetChanged()
     }
 }

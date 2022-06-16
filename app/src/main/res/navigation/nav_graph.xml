@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/allHarvestsFragment"
         android:name="com.example.cubecalc.fragments.AllHarvestsFragment"
-        android:label="fragment_all_harvests"
-        tools:layout="@layout/fragment_all_harvests" >
+        tools:layout="@layout/fragment_all_harvests">
         <action
             android:id="@+id/action_allHarvestsFragment_to_addNewHarvestFragment"
             app:destination="@id/addNewHarvestFragment" />
@@ -21,48 +20,37 @@
     <fragment
         android:id="@+id/addNewHarvestFragment"
         android:name="com.example.cubecalc.fragments.AddNewHarvestFragment"
-        android:label="AddNewHarvestFragment"
         tools:layout="@layout/fragment_add_new_harvest">
         <action
             android:id="@+id/action_addNewHarvestFragment_to_allHarvestsFragment"
             app:destination="@id/allHarvestsFragment"
             app:popUpTo="@id/allHarvestsFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_addNewHarvestFragment_to_editHarvestFragment"
-            app:destination="@id/editHarvestFragment"
-            app:popUpTo="@id/allHarvestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editHarvestFragment"
-        android:name="com.example.cubecalc.fragments.EditHarvestFragment"
-        android:label="EditHarvestFragment" >
+        android:name="com.example.cubecalc.fragments.EditHarvestFragment">
         <action
             android:id="@+id/action_editHarvestFragment_to_allHarvestsFragment"
             app:destination="@id/allHarvestsFragment"
             app:popUpTo="@id/allHarvestsFragment"
             app:popUpToInclusive="false" />
         <argument
-            android:name="harvestId"
-            app:argType="integer" />
+            android:name="harvest"
+            app:argType="com.example.cubecalc.model.Harvest" />
         <action
             android:id="@+id/action_editHarvestFragment_to_addNewLogFragment"
             app:destination="@id/addNewLogFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewLogFragment"
-        android:name="com.example.cubecalc.fragments.AddNewLogFragment"
-        android:label="AddNewLogFragment" >
+        android:name="com.example.cubecalc.fragments.AddNewLogFragment">
         <action
             android:id="@+id/action_addNewLogFragment_to_editHarvestFragment"
             app:destination="@id/editHarvestFragment"
-            app:popUpTo="@id/allHarvestsFragment" />
+            app:popUpTo="@id/editHarvestFragment" />
         <argument
-            android:name="harvest"
-            app:argType="com.example.cubecalc.model.Harvest" />
-        <argument
-            android:name="new"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:name="harvestId"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -41,20 +41,4 @@ class HarvestViewModel(application: Application) : AndroidViewModel(application)
             repository.deleteHarvest(harvest)
         }
     }
-
-    fun getDataWithId(harvestId: Int): LiveData<Harvest> {
-        val result = MutableLiveData<Harvest>()
-        viewModelScope.launch(Dispatchers.IO) {
-            result.postValue(repository.getDataWithId(harvestId))
-        }
-        return result
-    }
-
-    fun getLastAdded(): LiveData<Harvest> {
-        val result = MutableLiveData<Harvest>()
-        viewModelScope.launch(Dispatchers.IO) {
-            result.postValue(repository.getLastAdded())
-        }
-        return result
-    }
 }

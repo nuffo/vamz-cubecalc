@@ -19,12 +19,4 @@ class HarvestRepository(private val harvestDao: HarvestDao) {
     suspend fun deleteHarvest(harvest: Harvest) {
         harvestDao.deleteHarvest(harvest)
     }
-
-    suspend fun getDataWithId(harvestId: Int): Harvest {
-        return harvestDao.getHarvestWithId(harvestId)
-    }
-
-    suspend fun getLastAdded(): Harvest {
-        return harvestDao.getLast()
-    }
 }

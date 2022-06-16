@@ -18,10 +18,4 @@ interface HarvestDao {
 
     @Query("SELECT * FROM harvests")
     fun getAllHarvests(): LiveData<List<Harvest>>
-
-    @Query("SELECT * FROM harvests WHERE createdAt = (SELECT MAX(createdAt) FROM harvests) ")
-    suspend fun getLast(): Harvest
-
-    @Query("SELECT * FROM harvests WHERE id = :id")
-    suspend fun getHarvestWithId(id: Int): Harvest
 }

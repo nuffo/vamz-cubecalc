@@ -1,15 +1,5 @@
 <resources>
     <string name="app_name">CubeCalc</string>
-    <string name="harvest1">I am strong.</string>
-    <string name="harvest2">I believe in myself.</string>
-    <string name="harvest3">Each day is</string>
-    <string name="harvest4">Every challenge.</string>
-    <string name="harvest5">I have so much.</string>
-    <string name="harvest6">Good things.</string>
-    <string name="harvest7">New opportunities.</string>
-    <string name="harvest8">I have the courage.</string>
-    <string name="harvest9">Things will unfold.</string>
-    <string name="harvest10">I will be present.</string>
     <string name="title_all_harvests">Harvests</string>
     <string name="harvest_item_edit_button">Edit harvest</string>
     <string name="harvest_item_delete_button">Delete harvest</string>

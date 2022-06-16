@@ -30,9 +30,7 @@ class AllHarvestsFragment : Fragment(), HarvestRecyclerViewInterface {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        val binding: FragmentAllHarvestsBinding = DataBindingUtil.inflate<FragmentAllHarvestsBinding>(inflater,
-            R.layout.fragment_all_harvests, container, false)
-        //val myDataset = Datasource().loadHarvests()
+        val binding: FragmentAllHarvestsBinding = DataBindingUtil.inflate<FragmentAllHarvestsBinding>(inflater, R.layout.fragment_all_harvests, container, false)
 
         val adapter = HarvestAdapter(this)
         val recyclerView = binding.recyclerViewHarvests
@@ -45,66 +43,13 @@ class AllHarvestsFragment : Fragment(), HarvestRecyclerViewInterface {
             binding.noHarvests.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
         })
 
-//        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-        binding.addNewHarvestButton.setOnClickListener {
-            Log.i("kokot", "kokot")
-            this.findNavController().navigate(AllHarvestsFragmentDirections.actionAllHarvestsFragmentToAddNewHarvestFragment())
-        }
+        binding.addNewHarvestButton.setOnClickListener { this.findNavController().navigate(AllHarvestsFragmentDirections.actionAllHarvestsFragmentToAddNewHarvestFragment()) }
 
-//        val fab: View = binding.addNewHarvestButton
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .show()
-//        }
-
-
-        Log.i("TitleFragment", "onCreateView Called")
         return binding.root
     }
 
     override fun onHarvestDelete(harvest: Harvest) {
         mHarvestViewModel.deleteHarvest(harvest)
         Toast.makeText(requireContext(), "Succesfully removed harvest: ${harvest.title}!", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.i("TitleFragment", "onAttach called")
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.i("TitleFragment", "onCreate called")
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.i("TitleFragment", "onViewCreated called")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("TitleFragment", "onStart called")
-    }
-    override fun onResume() {
-        super.onResume()
-        Log.i("TitleFragment", "onResume called")
-    }
-    override fun onPause() {
-        super.onPause()
-        Log.i("TitleFragment", "onPause called")
-    }
-    override fun onStop() {
-        super.onStop()
-        Log.i("TitleFragment", "onStop called")
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.i("TitleFragment", "onDestroyView called")
-    }
-    override fun onDetach() {
-        super.onDetach()
-        Log.i("TitleFragment", "onDetach called")
     }
 }
